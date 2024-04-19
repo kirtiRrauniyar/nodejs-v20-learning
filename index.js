@@ -1,21 +1,18 @@
-const fs = require('fs');
-const path = require('path');
-const dirpath = path.join(__dirname,'crud');
-const filepath = `${dirpath}/appple.text`;
+let a = 10;
+let b= 0;
 
-// fs.writeFileSync(filepath,'this is creating file with the help of writefilesynce mthod');//create file 
+// setTimeout(()=>{
+//     b=20
+// },2000);
 
-// fs.readFile(filepath,'utf-8',(err,item)=>{
-//     console.log(item);
-// }) // reade file
+// console.log(a+b); // output 10 not 30 ddwaback asynchronous lang bez excute and forward not wait for this handle by promises and await function
+let waitingdata = new Promise((resolve,reject)=>{
+    setTimeout(()=>{
+           resolve(30)
+        },2000);
+})
 
-// fs.appendFile(filepath,'and file name is apple.text',(err)=>{
-//     if(!err) console.log("file text updated succesfully");
-// }) //update file
-
-// fs.rename(filepath,`${dirpath}/orrange.text`,(err)=>{
-//     if(!err) console.log("file name updated succesfully");
-// })
-
-fs.unlinkSync(`${dirpath}/text.txt`)
-
+waitingdata.then((data)=>{
+    b= data;
+    console.log(a+b)
+})
