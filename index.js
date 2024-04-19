@@ -1,18 +1,13 @@
-let a = 10;
-let b= 0;
+const express = require('express');
+const app = express();
 
-// setTimeout(()=>{
-//     b=20
-// },2000);
-
-// console.log(a+b); // output 10 not 30 ddwaback asynchronous lang bez excute and forward not wait for this handle by promises and await function
-let waitingdata = new Promise((resolve,reject)=>{
-    setTimeout(()=>{
-           resolve(30)
-        },2000);
+app.get('',(req,res)=>{
+    console.log("data requested by browser",req.query.name);
+    res.send("hi home page" + req.query.name);
 })
 
-waitingdata.then((data)=>{
-    b= data;
-    console.log(a+b)
+app.get('/about',(req,res)=>{
+    res.send("hi about page");
 })
+
+app.listen(5000);
