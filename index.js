@@ -1,25 +1,15 @@
-const express = require('express');
-const path = require('path');
-const app = express();
+const dbconnection = require("./mongodb")
 
-const publicpath = path.join(__dirname,'public');
-//  app.use(express.static(publicpath));
-
-//remove route extention
-app.get('',(_,resp)=>{
-   resp.sendFile(`${publicpath}/index.html`);
+// to handle promises use then function or async await function 
+dbconnection().then((resp) => {
+    resp.find().toArray().then((data)=>{
+        console.log(data);
+    })
 })
 
-app.get('/about',(_,resp)=>{
-    resp.sendFile(`${publicpath}/about.html`);
- })
-
- app.get('/help',(_,resp)=>{
-    resp.sendFile(`${publicpath}/help.html`);
- })
-
- app.get('*',(_,resp)=>{
-    resp.sendFile(`${publicpath}/404.html`);
- })
-
-app.listen(5000);
+// const main = async () =>{
+//     let data = await dbconnection();
+//     data = await data.find().toArray();
+//     console.log(data);
+// }
+// main();
